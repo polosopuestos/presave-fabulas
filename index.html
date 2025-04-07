@@ -11,9 +11,10 @@
 </head>
 <body class="relative h-screen w-screen overflow-hidden">
     <!-- Video de fondo -->
-    <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop playsinline>
+    <video id="video-bg" class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop playsinline>
         <source src="./videos/VIDEO.webm" type="video/webm">
     </video>
+    <img id="fallback-image" src="img-fallback.jpg" class="absolute top-0 left-0 w-full h-full object-cover hidden" />
     
     <!-- Capa de oscurecimiento -->
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
@@ -61,6 +62,14 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const isInstagram = ua.includes("Instagram");
+
+        if (isInstagram) {
+            document.getElementById("video-bg").style.display = "none";
+            document.getElementById("fallback-image").style.display = "block";
+        }
     </script>
 </body>
 </html>
